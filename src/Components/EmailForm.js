@@ -38,6 +38,7 @@ const EmailForm = () => {
     <>
       {!userFound && !toRegister ? (
         <EmailFormContainer>
+          <p className="header">Welcome to GetFit Yoga Classes</p>
           <form onSubmit={submitHandler} class="registration-form">
             <p>
               <label className="label" for="emailid">
@@ -75,7 +76,12 @@ const EmailForm = () => {
 
 const EmailFormContainer = styled.div`
   border-radius:4px;
+  height:40vh;
   background-color: white;
+  .header{
+    padding-top:30px;
+    font-weight:600;
+  }
   .btn {
     display: flex;
     justify-content: center;
@@ -125,6 +131,9 @@ const EmailFormContainer = styled.div`
   button {
     height:30px;
     width:250px;
+    color:white;
+    background-color:#282c34;
+    border-radius:5px;
     }
   }
 `;
