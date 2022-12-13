@@ -5,7 +5,6 @@ This project is created using :
 - For client-side : React.js
 - For **server-side (backend)** : Node.js + Express.js + MongoDB
 
----
 
 ## ER Design of DB Schema
 
@@ -45,6 +44,70 @@ Here I have created 3 different tables:
     
 
 ![Database ER diagram (Yoga Classes).png](https://raw.githubusercontent.com/himanksuiwala/flexmoney-assignment/80e236ef10cf807b0e50cc80d96631db8848a643/Yoga%20Classes%20Admission%20Form%201f0c953aa9904f6691bc04d7efb6a94d/Database%20ER%20diagram%20(Yoga%20Classes)1.png)
+
+## Assumptions & Approach
+
+I implemented the project using **Tier-3 Architecture** i.e. seperated the client-side from server-side & server-side from database.
+
+Deployed the seperate Server using **Cyclic** & client-side using **Vercel**
+
+Link for Server repository : https://github.com/himanksuiwala/flexmoney-server
+
+I’ve create the form using vanilla CSS & HTML.
+
+When user loads the site, on home page the first form is **Email-form.**
+
+### 1.Email-Form
+
+Its asks for User’s email.
+
+***Why does it asks for email in first step ?***
+
+As stated earlier, *email* is used to *uniquely identify* a person in DB, with the help of email first of all it will check whether user exists of not. Accordingly we will proceed further.
+
+Case 1: If Users Exists → Load the **Subscription-Form**
+
+Case 2: If Users does not Exists → Load the **Registration Form →** Load the **Subscription-Form.**
+
+### 2.**Registration-Form**
+
+After passing through Email-Form, This is used to register the Customer/ User for the first time. Although this registration is ***one-time-only.***
+
+Customer submits various details as name, contact, DoB & others as stated in ER description.
+
+Implemented a *customDoB validator* using RegEx which will tell whether eligible to register or not.
+
+After getting successfull response on submission it proceeds to next Subscription-Form.
+
+### 3.Subscription-Form
+
+This is the final form through which the user will select across various available batches & makes final payment.
+
+Here I’ve added listbox for list of available batches which is fetched from server itself.
+
+User selects Mode of Payment for subscription accor. to his/her convinience.
+
+User selects the Date to start subscription with, and calculate the *end of month* with that ref.
+
+Moreover to **prevent user from choosing the batch in same month** we can exec. a query in db checking for a user’s subscription in dB.
+
+**CompeletePayment** function dispatches the data to server to store data in dB & alerts the user on getting sucessful response.
+
+## API Endpoints
+
+Server for the project is available on [Here](https://github.com/himanksuiwala/flexmoney-server) 
+
+Following are the used Custom scripted endpoints used to communicate with server:
+
+1. **/findUser**
+    
+     Query : findUser?userId={user_id} 
+    
+     Here to pass the user’s email as user_id to check if user exists or not.
+    
+2. /registerUser → Used in storing the values into dB.
+3. /addBatch → Used whenever a new batch is to be introduced.
+4. /subscribe → Saves the subscription information when subscribed by user.
 ----
 # Getting Started with Create React App
 
