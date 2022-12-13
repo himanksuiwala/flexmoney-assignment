@@ -4,7 +4,7 @@ import styled from "styled-components";
 import RegisterForm from "./RegisterForm";
 import { SubscriptionForm } from "./SubscriptionForm";
 const EmailForm = () => {
-  const URL = `http://localhost:3001`;
+  const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const [email, setEmail] = useState("");
   const [userFound, setUserFound] = useState(false);
   const [userId, setUserId] = useState("");

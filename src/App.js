@@ -1,7 +1,6 @@
 import "./App.css";
 import Home from "./Pages/Home";
 import styled from "styled-components";
-import Navbar from "./Components/Navbar";
 function App() {
   return (
     <Container>

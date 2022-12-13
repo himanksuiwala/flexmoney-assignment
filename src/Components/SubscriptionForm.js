@@ -16,7 +16,6 @@ export const SubscriptionForm = (props) => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
-    console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
@@ -33,8 +32,7 @@ export const SubscriptionForm = (props) => {
     return errors;
   };
 
-  const URL = `http://localhost:3001`;
-  console.log("Paased", formValues);
+  const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const CompeletePayment = (e) => {
     e.preventDefault();
     setFormErrors(validate(formValues));

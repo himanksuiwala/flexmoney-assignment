@@ -10,7 +10,7 @@ const RegisterForm = (props) => {
     Email: props.email,
     Contact: "",
   };
-  const URL = `http://localhost:3001`;
+  const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   let registerSuccess = false;
   let user_id = "";
   const [formValues, setFormValues] = useState(initialValues);
@@ -107,7 +107,7 @@ const RegisterForm = (props) => {
             value={formValues.DoB}
             onChange={handleChange}
             required
-            placeholder="Enter DOB in DD/MM/YYYY format"
+            placeholder="Enter DOB in MM/DD/YYYY format"
           />
           <p className="error_msg">{formErrors.DoB}</p>
         </p>
