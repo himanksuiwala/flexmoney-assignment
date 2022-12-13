@@ -32,7 +32,7 @@ const RegisterForm = (props) => {
     setIsSubmit(true);
     {
       isSubmit &&
-        axios.post(`${process.env.SERVER_URL}/registerUser`, formValues).then(
+        axios.post(`${URL}/registerUser`, formValues).then(
           (response) => {
             if (response.status === 201) {
               console.log(response.data);

@@ -39,7 +39,7 @@ export const SubscriptionForm = (props) => {
     setIsSubmit(true);
     {
       isSubmit &&
-        axios.post(`${process.env.SERVER_URL}/subscribe`, formValues).then(
+        axios.post(`${URL}/subscribe`, formValues).then(
           (response) => {
             if (response.status === 201) {
               alert("Payment Successful. You've succesfully enrolled");
