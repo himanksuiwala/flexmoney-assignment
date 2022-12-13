@@ -1,3 +1,51 @@
+# Yoga Classes Admission Form
+
+This project is created using :
+
+- For client-side : React.js
+- For **server-side (backend)** : Node.js + Express.js + MongoDB
+
+---
+
+## ER Design of DB Schema
+
+Here I have created 3 different tables:
+
+1. **Customer** - Stores the customer’s data, who is getting enrolled for yoga classes.
+    
+    Having Attributes:
+    
+    1. Customer_Id → System generated *Id* which acts a ***primary key*** of the table.
+    2. First_name → Holds the first name of Customer
+    3. Last_name → Holds the last name of Customer
+    4. Sex → Holds the Gender/Sex of Customer
+    5. DoB(Date of Birth) → Holds the DoB of Customer to validate whether he/she is eligible or not.
+    6. Email → Holds the email address, which is used to identify uniquely & find the existing customer.
+    7. Date_of_Joining → System generated timestamp which records the date on which user first enrolled for classes.
+2. **Batch -** Keeps track of active batches available to Customer
+    
+    Having Attributes:
+    
+    1. Batch_Id → System generated Id acting as primary key, uniquely defining a batch.
+    2. Batch_name → Holds name of the batch.
+    3. Strt_time(*in hrs*) → Holds starting time of the batch.
+    4. End_time(*in hrs*) → Holds ending time of the batch.
+    5. Instructor_name → Holds the name of instructor teaching yoga.
+3. **Subscription -** Keeps track of subscription of all customers who’ve enrolled themselves in yoga classes.
+    
+    Having Attributes:
+    
+    1. Subscription_Id → System generated unique id acting a primary key of the table.
+    2. Customer_Id → Same Id from **Customer Table** to which it has been ***referred*** to.
+    3. Batch_Id → Id from Batch Table.
+    4. Subscription_strt → Holds the date from when customer wants to start yoga.
+    5. Subscription_valid_till → Holds the date as *end of the month* in reference to *Subscription_strt**,*** as customer will avail service only till the end of the month(irrespective of start of subscription)
+    
+    *Moreover, This table is joined with reference to Customer_Id & Batch_Id respectively.*
+    
+
+![Database ER diagram (Yoga Classes).png](https://raw.githubusercontent.com/himanksuiwala/flexmoney-assignment/80e236ef10cf807b0e50cc80d96631db8848a643/Yoga%20Classes%20Admission%20Form%201f0c953aa9904f6691bc04d7efb6a94d/Database%20ER%20diagram%20(Yoga%20Classes)1.png)
+----
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -13,58 +61,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
