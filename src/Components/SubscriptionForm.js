@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import SubmitButton from "./SubmitButton";
 export const SubscriptionForm = (props) => {
   const initialValues = {
     Customer_Id: props.userId,
@@ -15,14 +15,9 @@ export const SubscriptionForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-  }, [formErrors]);
+
   const validate = (values) => {
     const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.Subscription_strt) {
       errors.Subscription_strt = "Date is required";
     }
@@ -104,15 +99,14 @@ export const SubscriptionForm = (props) => {
         </p>
         <p>
           <label for="Payment">Mode of Payment</label>
-          <input
-            type="text"
-            name="Mode_of_payment"
-            id="payment"
-            value={formValues.Mode_of_payment}
-            onChange={handleChange}
-            required
-            placeholder="UPI/CARDS/Paytm"
-          />
+          <select onChange={handleChange} name="Mode_of_payment" class="dd">
+            <option defaultChecked value="dummy">
+              Choose a payment method
+            </option>
+            <option value="UPI">UPI</option>
+            <option value="Credit/Debit Card">Credit/Debit Card</option>
+            <option value="Paytm">Paytm</option>
+          </select>
         </p>
         <p className="err">
           {" "}
@@ -129,7 +123,7 @@ export const SubscriptionForm = (props) => {
           />
         </p>
         <div className="btn">
-          <button>Pay Now</button>
+          <SubmitButton type={"Pay Now"} />
         </div>
       </form>
     </Container>
@@ -159,7 +153,6 @@ const Container = styled.div`
     margin: 5px 0px 0px 00px;
   }
   .error_msg {
-    ${"" /* color: red; */}
     font-size: 12px;
   }
   .registration-form {
@@ -193,12 +186,5 @@ const Container = styled.div`
     color: #d63d0a;
     display: none;
   }
-  button {
-    height:30px;
-    width:250px;
-    color:white;
-    background-color:#282c34;
-    border-radius:5px;
-    }
   }
 `;

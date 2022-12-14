@@ -3,6 +3,7 @@ import axios from "axios";
 import styled from "styled-components";
 import RegisterForm from "./RegisterForm";
 import { SubscriptionForm } from "./SubscriptionForm";
+import SubmitButton from "./SubmitButton";
 const EmailForm = () => {
   const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const [email, setEmail] = useState("");
@@ -55,7 +56,8 @@ const EmailForm = () => {
               />
             </p>
             <div className="btn">
-              <button>Submit</button>
+              {/* <button>Submit</button> */}
+              <SubmitButton type={'Submit'}/>
             </div>
           </form>
         </EmailFormContainer>
@@ -128,13 +130,7 @@ const EmailFormContainer = styled.div`
     color: #d63d0a;
     display: none;
   }
-  button {
-    height:30px;
-    width:250px;
-    color:white;
-    background-color:#282c34;
-    border-radius:5px;
-    }
+  
   }
 `;
 export default EmailForm;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import SubmitButton from "./SubmitButton";
 const RegisterForm = (props) => {
   const initialValues = {
     First_name: "",
@@ -16,6 +17,8 @@ const RegisterForm = (props) => {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isValidAge, setIsValidAge] = useState(false);
+  const [isMobileValidated, SetisMobileValidated] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,15 +32,16 @@ const RegisterForm = (props) => {
   const SubmitHandler = (e) => {
     e.preventDefault();
     setFormErrors(ageValidator(formValues.DoB));
+    validateForm();
     setIsSubmit(true);
     {
-      isSubmit &&
+      isValidAge &&
+        isMobileValidated &&
         axios.post(`${URL}/registerUser`, formValues).then(
           (response) => {
             if (response.status === 201) {
               console.log(response.data);
               props.registerSuccess(true);
-              // console.log(response.data._id)
               props._id(response.data._id);
             }
           },
@@ -48,6 +52,14 @@ const RegisterForm = (props) => {
         );
     }
   };
+  function validateNumber(input) {
+    var re = /^(\d{3})[- ]?(\d{3})[- ]?(\d{4})$/;
+    return re.test(input);
+  }
+  function validateForm(e) {
+    if (!validateNumber(formValues.Contact)){ alert("Enter a valid Number"); }
+    else SetisMobileValidated(true);
+  }
   const ageValidator = (DoB) => {
     const errors = {};
     var birthday = DoB;
@@ -61,18 +73,19 @@ const RegisterForm = (props) => {
     if (isNaN(userBirthDate)) {
       errors.DoB = "date of birth is invalid";
     } else if (userBirthDate > cutOff18) {
-      errors.DoB = "you have to be older than 18";
+      errors.DoB = "You have to be older than 18";
     } else if (userBirthDate < cutOff65) {
-      errors.DoB = "you have to be younger than 65";
+      errors.DoB = "You have to be younger than 65";
     } else {
       errors.DoB = "";
+      setIsValidAge(true);
     }
     return errors;
   };
   return (
     <RegisterFormContainer>
       <div className="form-header">
-        <p>First Get Your self Registered</p>
+        <p>First get your self registered</p>
       </div>
       <form onSubmit={SubmitHandler} class="registration-form">
         <p>
@@ -124,14 +137,17 @@ const RegisterForm = (props) => {
           <label for="phone">Mobile phone</label>
           <input
             value={formValues.Contact}
-            type="text"
+            type="number"
             id="mobile_phone"
             name="Contact"
             onChange={handleChange}
             required
+            maxlength="10"
+            // pattern="[0-9]{10}"
           />
+          <p className="error_msg">{formErrors.Contact}</p>
         </p>
-        <button>Register</button>
+        <SubmitButton type={"Register"} />
       </form>
     </RegisterFormContainer>
   );
@@ -141,9 +157,9 @@ const RegisterFormContainer = styled.div`
   height: 67vh;
   border-radius: 4px;
   background-color: white;
-  ${"" /* padding-top:10px */}
   .form-header {
     padding-top: 4px;
+    font-size: 20px;
   }
 
   .batch-label {
@@ -204,13 +220,6 @@ const RegisterFormContainer = styled.div`
     padding: 5px 0 0 3px;
     color: #d63d0a;
     display: none;
-  }
-  button {
-    height: 30px;
-    width: 250px;
-    color: white;
-    background-color: #282c34;
-    border-radius: 5px;
   }
 `;
 export default RegisterForm;
