@@ -13,7 +13,6 @@ const EmailForm = () => {
   const [registerSuccess, setRegisterSuccess] = useState(false);
   const submitHandler = (e) => {
     e.preventDefault();
-
     axios.get(`${URL}/findUser?userId=${email}`, { Email: email }).then(
       (response) => {
         if (response.status === 210) {

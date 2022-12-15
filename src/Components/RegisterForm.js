@@ -24,11 +24,6 @@ const RegisterForm = (props) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
-  useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log("");
-    }
-  }, [formErrors]);
   const SubmitHandler = (e) => {
     e.preventDefault();
     setFormErrors(ageValidator(formValues.DoB));

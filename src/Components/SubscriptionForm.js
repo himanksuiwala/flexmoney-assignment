@@ -71,10 +71,10 @@ export const SubscriptionForm = (props) => {
             <option defaultChecked value="dummy">
               Choose a batch
             </option>
-            <option value="6395959e7470b992539dff43">Batch-1 : 6-7AM</option>
-            <option value="639595c67470b992539dff45">Batch-2 : 7-8AM</option>
-            <option value="639595e97470b992539dff47">Batch-3 : 8-9AM</option>
-            <option value="639595ff7470b992539dff49">Batch-4 : 5-6PM</option>
+            <option value="6395959e7470b992539dff43">Batch-1 : 6-7AM - Mr. Ram</option>
+            <option value="639595c67470b992539dff45">Batch-2 : 7-8AM - Mr. Shyam</option>
+            <option value="639595e97470b992539dff47">Batch-3 : 8-9AM - Mr. Raj</option>
+            <option value="639595ff7470b992539dff49">Batch-4 : 5-6PM - Mr. Kumar</option>
           </select>
           <p className="err">{formErrors.Batch_Id}</p>
         </p>
