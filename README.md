@@ -8,7 +8,7 @@ This project is created using :
 
 ## ER Design of DB Schema
 
-Here I have created 3 different tables:
+Here I have created 3 different tables & populate the tables with some data as shown below:
 
 1. **Customer** - Stores the customer’s data, who is getting enrolled for yoga classes.
     
@@ -21,6 +21,9 @@ Here I have created 3 different tables:
     5. DoB(Date of Birth) → Holds the DoB of Customer to validate whether he/she is eligible or not.
     6. Email → Holds the email address, which is used to identify uniquely & find the existing customer.
     7. Date_of_Joining → System generated timestamp which records the date on which user first enrolled for classes.
+    
+        ![Customer Model.png](https://raw.githubusercontent.com/himanksuiwala/flexmoney-assignment/main/Yoga%20Classes%20Admission%20Form%201f0c953aa9904f6691bc04d7efb6a94d/Screenshot_CustomerModel.png)
+    
 2. **Batch -** Keeps track of active batches available to Customer
     
     Having Attributes:
@@ -30,6 +33,8 @@ Here I have created 3 different tables:
     3. Strt_time(*in hrs*) → Holds starting time of the batch.
     4. End_time(*in hrs*) → Holds ending time of the batch.
     5. Instructor_name → Holds the name of instructor teaching yoga.
+    
+        ![Customer Model.png](https://raw.githubusercontent.com/himanksuiwala/flexmoney-assignment/main/Yoga%20Classes%20Admission%20Form%201f0c953aa9904f6691bc04d7efb6a94d/Screenshot_BatchModel%20.png)
 3. **Subscription -** Keeps track of subscription of all customers who’ve enrolled themselves in yoga classes.
     
     Having Attributes:
@@ -40,6 +45,8 @@ Here I have created 3 different tables:
     4. Subscription_strt → Holds the date from when customer wants to start yoga.
     5. Subscription_valid_till → Holds the date as *end of the month* in reference to *Subscription_strt**,*** as customer will avail service only till the end of the month(irrespective of start of subscription)
     
+        ![Customer Model.png](https://raw.githubusercontent.com/himanksuiwala/flexmoney-assignment/main/Yoga%20Classes%20Admission%20Form%201f0c953aa9904f6691bc04d7efb6a94d/Screenshot_SubscriptionModel.png)
+    
     *Moreover, This table is joined with reference to Customer_Id & Batch_Id respectively.*
     
 
@@ -47,7 +54,7 @@ Here I have created 3 different tables:
 
 ## Assumptions & Approach
 
-I implemented the project using **Tier-3 Architecture** i.e. seperated the client-side from server-side & server-side from database.
+I implemented the project using **Tier-3 Architecture** i.e. seperated the client-side from server-side & server-side from database. Used MongoDB as db.
 
 Deployed the seperate Server using **Cyclic** & client-side using **Vercel**
 
@@ -97,30 +104,9 @@ Moreover to **prevent user from choosing the batch in same month** we can exec. 
 
 Server for the project is available on [Here](https://github.com/himanksuiwala/flexmoney-server) 
 
-Following are the used Custom scripted endpoints used to communicate with server:
+Following are the used Custom scripted endpoints used to communicate with server and performs the respective operations:
 
-1. **/findUser**
-    
-     Query : findUser?userId={user_id} 
-    
-     Here to pass the user’s email as user_id to check if user exists or not.
-    
-2. /registerUser → Used in storing the values into dB.
-3. /addBatch → Used whenever a new batch is to be introduced.
-4. /subscribe → Saves the subscription information when subscribed by user.
-----
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **`/findUser` →** Passes the user’s email as user_id to check if user exists or not.
+2. `/registerUser` → Used in storing the values into dB.
+3. `/addBatch` → Used whenever a new batch is to be introduced.
+4. `/subscribe` → Saves the subscription information when subscribed by user.
