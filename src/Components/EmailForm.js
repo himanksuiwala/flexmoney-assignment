@@ -1,26 +1,28 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import RegisterForm from "./RegisterForm";
-import { SubscriptionForm } from "./SubscriptionForm";
 import SubmitButton from "./SubmitButton";
-const EmailForm = () => {
+const EmailForm = (props) => {
   const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const [email, setEmail] = useState("");
-  const [userFound, setUserFound] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [toRegister, setToRegister] = useState(false);
-  const [registerSuccess, setRegisterSuccess] = useState(false);
+  let userFound = false;
+  let userId = "";
+  let userEmail = "";
+  let ToRegister = false;
   const submitHandler = (e) => {
     e.preventDefault();
     axios.get(`${URL}/findUser?userId=${email}`, { Email: email }).then(
+      //Checking if user exists or not
       (response) => {
         if (response.status === 210) {
-          setToRegister(true);
-          console.log(response);
+          //User does not exists
+          props.ToRegister(true);
+          props.userFound(false);
+          props.userEmail(email);
         } else if (response.status === 201) {
-          setUserFound(true);
-          setUserId(response.data._id);
+          //User exists
+          props.userFound(true);
+          props.userId(response.data._id);
         }
       },
       (e) => {
@@ -28,49 +30,30 @@ const EmailForm = () => {
       }
     );
   };
-  const fromchild = (data) => {
-    if (data === true) setRegisterSuccess(true);
-  };
-  const fetched_id = (data) => {
-    setUserId(data);
-  };
   return (
     <>
-      {!userFound && !toRegister ? (
-        <EmailFormContainer>
-          <p className="header">Welcome to GetFit Yoga Classes</p>
-          <form onSubmit={submitHandler} class="registration-form">
-            <p>
-              <label className="label" for="emailid">
-                <h2>Email</h2>
-              </label>
-              <input
-                type="email"
-                placeholder="Enter your Email Address"
-                id="current_email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                name="email"
-              />
-            </p>
-            <div className="btn">
-              {/* <button>Submit</button> */}
-              <SubmitButton type={'Submit'}/>
-            </div>
-          </form>
-        </EmailFormContainer>
-      ) : userFound ? (
-        <SubscriptionForm userId={userId} />
-      ) : !registerSuccess ? (
-        <RegisterForm
-          _id={fetched_id}
-          registerSuccess={fromchild}
-          email={email}
-        />
-      ) : (
-        <SubscriptionForm userId={userId} />
-      )}
+      <EmailFormContainer>
+        <p className="header">Welcome to GetFit Yoga Classes</p>
+        <form onSubmit={submitHandler} class="registration-form">
+          <p>
+            <label className="label" for="emailid">
+              <h2>Email</h2>
+            </label>
+            <input
+              type="email"
+              placeholder="Enter your Email Address"
+              id="current_email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              name="email"
+            />
+          </p>
+          <div className="btn">
+            <SubmitButton type={"Submit"} />
+          </div>
+        </form>
+      </EmailFormContainer>
     </>
   );
 };

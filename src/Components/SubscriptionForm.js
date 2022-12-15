@@ -1,8 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import SubmitButton from "./SubmitButton";
-export const SubscriptionForm = (props) => {
+export default function SubscriptionForm(props) {
   const initialValues = {
     Customer_Id: props.userId,
     Batch_Id: "",
@@ -11,24 +11,23 @@ export const SubscriptionForm = (props) => {
     Mode_of_payment: "",
     Fees: 500,
   };
-
+  const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
   const validate = (values) => {
     const errors = {};
-    if (!values.Subscription_strt) {
+    if (!values.Subscription_strt)
       errors.Subscription_strt = "Date is required";
-    }
     if (!values.Batch_Id) errors.Batch_Id = "Selection of Batch is required!";
     if (!values.Mode_of_payment)
       errors.Mode_of_payment = "Choose any of Mode of Payment";
     return errors;
   };
 
-  const URL = `https://easy-rose-raven-vest.cyclic.app/`;
   const CompeletePayment = (e) => {
+    //Complete payment handler which will pop-up upon succesfull payment
     e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -71,10 +70,18 @@ export const SubscriptionForm = (props) => {
             <option defaultChecked value="dummy">
               Choose a batch
             </option>
-            <option value="6395959e7470b992539dff43">Batch-1 : 6-7AM - Mr. Ram</option>
-            <option value="639595c67470b992539dff45">Batch-2 : 7-8AM - Mr. Shyam</option>
-            <option value="639595e97470b992539dff47">Batch-3 : 8-9AM - Mr. Raj</option>
-            <option value="639595ff7470b992539dff49">Batch-4 : 5-6PM - Mr. Kumar</option>
+            <option value="6395959e7470b992539dff43">
+              Batch-1 : 6-7AM - Mr. Ram
+            </option>
+            <option value="639595c67470b992539dff45">
+              Batch-2 : 7-8AM - Mr. Shyam
+            </option>
+            <option value="639595e97470b992539dff47">
+              Batch-3 : 8-9AM - Mr. Raj
+            </option>
+            <option value="639595ff7470b992539dff49">
+              Batch-4 : 5-6PM - Mr. Kumar
+            </option>
           </select>
           <p className="err">{formErrors.Batch_Id}</p>
         </p>
@@ -128,7 +135,7 @@ export const SubscriptionForm = (props) => {
       </form>
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   height:67vh;

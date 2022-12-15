@@ -35,7 +35,6 @@ const RegisterForm = (props) => {
         axios.post(`${URL}/registerUser`, formValues).then(
           (response) => {
             if (response.status === 201) {
-              console.log(response.data);
               props.registerSuccess(true);
               props._id(response.data._id);
             }
